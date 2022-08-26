@@ -1,0 +1,36 @@
+import store as s, print_info, rental, return_
+
+def run_app():
+    s.init_store() 
+    while True:
+        print(f'''
+Welcome to Costume Rental Department
+{"-" * 80}
+Enter your choice
+1:  Enter 1 to Rent.
+2:  Enter 2 to Return.
+3:  Enter 3 to Exit.
+{"-" * 80}
+''')
+
+        try:
+            input_= int(input("Please select your choice: "))
+            if input_== 3:
+                 print("Thank you for visiting.")
+                 exit()
+            if input_== 1:
+                try:
+                    print_info.display(s.allCostume)
+                    rental.rent_costume(s.allCostume)
+                except IndexError:
+                    print("Invalid Costume ID. Restarting...")
+                    run_app 
+            elif input_== 2:
+                print_info.display(s.allCostume)
+                return_.return_(s.allCostume)
+            else:
+                print("\n\nInvalid number. Please read instructions carefully.\n")
+        except ValueError as e:  
+            print(f"\n\nPlease input a valid number. {e}")
+
+run_app()
